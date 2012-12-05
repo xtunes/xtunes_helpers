@@ -1,16 +1,12 @@
 PATH
   remote: .
   specs:
-    xtunes_helpers (0.0.1)
-      rails (~> 3.2.9)
-      test_engine
-
-PATH
-  remote: ./test_engine
-  specs:
     test_engine (0.0.1)
       haml
       rails (~> 3.2.9)
+    xtunes_helpers (0.0.1)
+      rails (~> 3.2.9)
+      test_engine
 
 GEM
   remote: http://rubygems.org/
@@ -104,5 +100,4 @@ PLATFORMS
 DEPENDENCIES
   jquery-rails
   sqlite3
-  test_engine!
   xtunes_helpers!
