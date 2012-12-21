@@ -8,6 +8,7 @@ gemspec
 # jquery-rails is used by the dummy application
 gem "jquery-rails"
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'rails', '~>3.2.8'
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
