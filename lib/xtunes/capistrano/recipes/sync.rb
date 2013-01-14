@@ -23,6 +23,9 @@ require 'pathname'
 #
 
 Capistrano::Configuration.instance.load do
+  unless exists?(:stage)
+    set :stage, environment
+  end
   namespace :sync do
 
     after "deploy:setup", "sync:setup"
