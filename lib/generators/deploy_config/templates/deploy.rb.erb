@@ -1,0 +1,51 @@
+# need rvm version > 1.12
+require "rvm/capistrano"
+require "bundler/capistrano"
+
+# uncomment following lines for multistage deploy
+#set :stages, %w(production)
+#set :default_stage, "production"
+#require 'capistrano/ext/multistage'
+
+# User settings
+set :user, 'webadmin'
+set :group,'www-data'
+
+#RVM settings
+set :rvm_bin_path, "/usr/local/rvm/bin/"
+set :rvm_ruby_string, 'deploy'
+
+#Application settings
+set :application, "<%= project_name %>"
+set :alias, ["*.#{application}", "#{application}.xtunes.cn"]
+
+#Server settings
+server "xtunes.cn", :app, :web, :db, :primary => true
+set :web_server, :nginx
+set :app_server, :passenger
+set :application_port, 80
+#set :application_uses_ssl, false
+#set :application_port_ssl, 443
+
+#Database settings
+set :database, :mysql
+
+#Sync settings
+set :sync_directories, ["public/uploads"]
+set :sync_backups, 3
+
+#Shared settings
+set :shared_children , %w{log tmp/pids public/uploads}
+
+#SCM settings
+set :scm, :git
+set :branch, 'master'
+set :deploy_to, "/opt/rails-apps/#{application}"
+set :repository,  "git@bitbucket.org:xtunes/#{application}.git"
+#set :deploy_via, :remote_cache
+#set :keep_releases, 3
+
+after 'deploy:finalize_update' , 'deploy:migrate'
+
+# Must be loaded after settings
+require 'xtunes/capistrano/recipes'
