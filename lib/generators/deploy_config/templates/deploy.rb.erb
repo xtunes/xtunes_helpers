@@ -45,7 +45,7 @@ set :repository,  "git@bitbucket.org:xtunes/#{application}.git"
 #set :deploy_via, :remote_cache
 #set :keep_releases, 3
 
-after 'deploy:finalize_update' , 'deploy:migrate'
+after 'deploy:db:symlink' , 'deploy:migrate'
 
 # Must be loaded after settings
 require 'xtunes/capistrano/recipes'

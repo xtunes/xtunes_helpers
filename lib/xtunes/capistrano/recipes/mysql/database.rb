@@ -91,7 +91,6 @@ Capistrano::Configuration.instance.load do
   on :exit do
     if fetch(:new_mysql_database_created,false)
       puts "======================================="
-      puts "Database created on #{server} :"
       puts "* database: #{db_name}"
       puts "* username: #{db_user}"
       puts "* password: #{db_pass}"
