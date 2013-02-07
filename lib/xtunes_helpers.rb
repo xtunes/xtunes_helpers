@@ -1,4 +1,3 @@
-require 'test_engine'
 module XtunesHelpers
   def self.setup
     yield self
