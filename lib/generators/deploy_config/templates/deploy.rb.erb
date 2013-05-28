@@ -16,6 +16,12 @@ set :rvm_path, '/usr/local/rvm'
 set :rvm_bin_path, "/usr/local/rvm/bin/"
 set :rvm_ruby_string, 'deploy'
 
+#Passenger settings
+#set :passenger_ruby, '/usr/local/rvm/wrappers/deploy/ruby'
+
+#Nginx settings
+set :global_access_log, '/var/log/nginx/access.log main'
+
 #Application settings
 set :application, "<%= project_name %>"
 set :alias, ["*.#{application}", "#{application}.xtunes.cn"]
@@ -42,7 +48,7 @@ set :shared_children , %w{log tmp/pids public/uploads public/assets}
 set :scm, :git
 set :branch, 'master'
 set :deploy_to, "/opt/rails-apps/#{application}"
-set :repository,  "git@bitbucket.org:xtunes/#{application}.git"
+set :repository,  "git@git.xtunes.cn:#{application}.git"
 #set :deploy_via, :remote_cache
 #set :keep_releases, 3
 

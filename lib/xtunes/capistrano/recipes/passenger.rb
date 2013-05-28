@@ -1,4 +1,5 @@
 Capistrano::Configuration.instance.load do
+  set :passenger_ruby, '/usr/local/rvm/wrappers/deploy/ruby' unless exists?(:passenger_ruby)
   namespace :passenger do
     desc "|DarkRecipes| Restart Rails app running under Phusion Passenger by touching restart.txt"
     task :restart, :roles => :app do

@@ -20,6 +20,10 @@ def is_using_nginx
   is_using('nginx', :web_server)
 end
 
+def has_global_access_log
+  exists?(:global_access_log)
+end
+
 def is_using_passenger
   is_using('passenger', :app_server)
 end
