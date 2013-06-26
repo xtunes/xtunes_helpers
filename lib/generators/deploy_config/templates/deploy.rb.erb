@@ -53,6 +53,7 @@ set :repository,  "git@git.xtunes.cn:#{application}.git"
 #set :keep_releases, 3
 
 after 'deploy:db:symlink' , 'deploy:migrate'
+after "deploy:update", "deploy:cleanup"
 
 # Must be loaded after settings
 require 'xtunes/capistrano/recipes'
