@@ -38,11 +38,11 @@ set :application_port, 80
 set :database, :mysql
 
 #Sync settings
-set :sync_directories, ["public/uploads"]
+set :sync_directories, ["public/system","attachments"]
 set :sync_backups, 3
 
 #Shared settings
-set :shared_children , %w{log tmp/pids public/uploads public/assets}
+set :shared_children , fetch(:shared_children) + %w{ attachments public/assets }
 
 #SCM settings
 set :scm, :git
