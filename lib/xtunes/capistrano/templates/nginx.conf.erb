@@ -25,8 +25,8 @@
         <% if has_global_access_log %>
         access_log <%= global_access_log%>;
         <% end %>
-        access_log <%= deploy_to %>/current/log/nginx.access.log main;
-        error_log  <%= deploy_to %>/current/log/nginx.error.log info;
+        # access_log <%= deploy_to %>/shared/log/nginx.access.log main;
+        # error_log  <%= deploy_to %>/shared/log/nginx.error.log info;
 
         # this rewrites all the requests to the maintenance.html
         # page if it exists in the doc root. This is for capistrano's
@@ -40,6 +40,8 @@
           <% if is_using_passenger %>
           rails_env <%= rails_env %>;
           passenger_enabled on;
+          passenger_set_cgi_param HTTP_X_ACCEL_MAPPING /=/sec/;
+          passenger_pass_header X-Accel-Redirect;
           <% end %>
 
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -77,14 +79,20 @@
           }
           <% end %>
         }
+        <% if is_using_passenger %>
+        location /sec/ {
+          alias /;
+          internal;
+        }
+        <% end %>
 
         location ~ ^/assets/ {
           add_header Cache-Control public;
-          add_header Last-Modified "";
+          expires max;
           add_header ETag "";
-          break;
           gzip_static on; # to serve pre-gzipped version
           expires max;
+          break;
         }
 
         # Rails error pages
